@@ -130,4 +130,8 @@ int getWinners(int players[MAX_PLAYERS], struct gameState *state);
 
 int village_card(int current_player, struct gameState *game_state, int hand_position);
 /* The card effect for the Village card*/
+
+int great_hall_card(int current_player, struct gameState *game_state, int hand_position);
+/*The card effect for the Great Hall card*/
+
 #endif
