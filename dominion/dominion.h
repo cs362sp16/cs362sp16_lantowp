@@ -134,4 +134,6 @@ int village_card(int current_player, struct gameState *game_state, int hand_posi
 int great_hall_card(int current_player, struct gameState *game_state, int hand_position);
 /*The card effect for the Great Hall card*/
 
+int smithy_card(int current_player, struct gameState *game_state, int hand_position);
+/*The card effect for the Smithy card*/
 #endif

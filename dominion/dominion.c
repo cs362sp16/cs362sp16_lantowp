@@ -649,9 +649,9 @@ int village_card(int current_player, struct gameState *game_state, int hand_posi
   drawCard(current_player, game_state);
 
   //+2 Actions
-  game_state->numActions = game_state->numActions + 2;
+  game_state->numActions += 2;
 
-  //Discard card from hand
+  //Discard Village from hand
   discardCard(hand_position, current_player, game_state, 0);
 
   return 0;
@@ -664,12 +664,22 @@ int great_hall_card(int current_player, struct gameState *game_state, int hand_p
       //+1 Action
       game_state->numActions++;
 
-      //discard card from hand
+      //Discard Great Hall from hand
       discardCard(hand_position, current_player, game_state, 0);
 
       return 0;
 }
 
+int smithy_card(int current_player, struct gameState *game_state, int hand_position) {
+  //+3 Cards
+  for (i = 1; i <= 3; i++)
+    drawCard(current_player, game_state);
+
+  //Discard Smithy from hand
+  discardCard(hand_position, current_player, game_state, 0);
+
+  return 0;
+}
 
 int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState *state, int handPos, int *bonus)
 {
@@ -857,15 +867,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
       return 0;
 
     case smithy:
-      //+3 Cards
-      for (i = 0; i < 3; i++)
-	{
-	  drawCard(currentPlayer, state);
-	}
-
-      //discard card from hand
-      discardCard(handPos, currentPlayer, state, 0);
-      return 0;
+      return smithy_card(currentPlayer, state, handPos);
 
     case village:
       return village_card(currentPlayer, state, handPos);
