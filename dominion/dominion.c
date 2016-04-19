@@ -135,48 +135,41 @@ int initializeGame(int numPlayers, int kingdomCards[10], int randomSeed,
   //supply intilization complete
 
   //set player decks
-  for (i = 0; i < numPlayers; i++)
-    {
-      state->deckCount[i] = 0;
-      for (j = 0; j < 3; j++)
-	{
-	  state->deck[i][j] = estate;
-	  state->deckCount[i]++;
-	}
-      for (j = 3; j < 10; j++)
-	{
-	  state->deck[i][j] = copper;
-	  state->deckCount[i]++;
-	}
-    }
+  for (i = 0; i < numPlayers; i++) {
+    state->deckCount[i] = 0;
+    for (j = 0; j < 3; j++) {
+  	  state->deck[i][j] = estate;
+  	  state->deckCount[i]++;
+  	}
+    for (j = 3; j < 10; j++) {
+  	  state->deck[i][j] = copper;
+  	  state->deckCount[i]++;
+  	}
+  }
 
   //shuffle player decks
-  for (i = 0; i < numPlayers; i++)
-    {
-      if ( shuffle(i, state) < 0 )
-	{
-	  return -1;
-	}
-    }
+  for (i = 0; i < numPlayers; i++) {
+    if ( shuffle(i, state) < 0 ) {
+	     return -1;
+	  }
+  }
 
   //draw player hands
-  for (i = 0; i < numPlayers; i++)
-    {
-      //initialize hand size to zero
-      state->handCount[i] = 0;
-      state->discardCount[i] = 0;
-      //draw 5 cards
-      // for (j = 0; j < 5; j++)
-      //	{
-      //	  drawCard(i, state);
-      //	}
-    }
+  for (i = 0; i < numPlayers; i++) {
+    //initialize hand size to zero
+    state->handCount[i] = 0;
+    state->discardCount[i] = 0;
+    //draw 5 cards
+    // for (j = 0; j < 5; j++)
+    //	{
+    //	  drawCard(i, state);
+    //	}
+  }
 
   //set embargo tokens to 0 for all supply piles
-  for (i = 0; i <= treasure_map; i++)
-    {
+  for (i = 0; i <= treasure_map; i++) {
       state->embargoTokens[i] = 0;
-    }
+  }
 
   //initialize first player's turn
   state->outpostPlayed = 0;
@@ -189,7 +182,7 @@ int initializeGame(int numPlayers, int kingdomCards[10], int randomSeed,
   //int it; move to top
 
   //Moved draw cards to here, only drawing at the start of a turn
-  for (it = 0; it < 5; it++){
+  for (it = 0; it < 5; it++) {
     drawCard(state->whoseTurn, state);
   }
 
@@ -199,7 +192,6 @@ int initializeGame(int numPlayers, int kingdomCards[10], int randomSeed,
 }
 
 int shuffle(int player, struct gameState *state) {
-
 
   int newDeck[MAX_DECK];
   int newDeckPos = 0;
@@ -353,17 +345,17 @@ int endTurn(struct gameState *state) {
   int currentPlayer = whoseTurn(state);
 
   //Discard hand
-  for (i = 0; i < state->handCount[currentPlayer]; i++){
+  for (i = 0; i < state->handCount[currentPlayer]; i++) {
     state->discard[currentPlayer][state->discardCount[currentPlayer]++] = state->hand[currentPlayer][i];//Discard
     state->hand[currentPlayer][i] = -1;//Set card to -1
   }
   state->handCount[currentPlayer] = 0;//Reset hand count
 
   //Code for determining the player
-  if (currentPlayer < (state->numPlayers - 1)){
+  if (currentPlayer < (state->numPlayers - 1)) {
     state->whoseTurn = currentPlayer + 1;//Still safe to increment
   }
-  else{
+  else {
     state->whoseTurn = 0;//Max player has been reached, loop back around to player 1
   }
 
