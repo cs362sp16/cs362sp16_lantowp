@@ -522,26 +522,26 @@ int getWinners(int players[MAX_PLAYERS], struct gameState *state) {
   return 0;
 }
 
-int drawCard(int player, struct gameState *state)
-{	int count;
-  int deckCounter;
-  if (state->deckCount[player] <= 0){//Deck is empty
+int drawCard(int player, struct gameState *state) {
+  int count, deckCounter;
 
+  //Deck is empty
+  if (state->deckCount[player] <= 0) {
     //Step 1 Shuffle the discard pile back into a deck
     int i;
     //Move discard to deck
-    for (i = 0; i < state->discardCount[player];i++){
+    for (i = 0; i < state->discardCount[player];i++) {
       state->deck[player][i] = state->discard[player][i];
       state->discard[player][i] = -1;
     }
 
     state->deckCount[player] = state->discardCount[player];
-    state->discardCount[player] = 0;//Reset discard
+    state->discardCount[player] = 0; //Reset discard
 
     //Shufffle the deck
     shuffle(player, state);//Shuffle the deck up and make it so that we can draw
 
-    if (DEBUG){//Debug statements
+    if (DEBUG) {//Debug statements
       printf("Deck count now: %d\n", state->deckCount[player]);
     }
 
@@ -550,7 +550,7 @@ int drawCard(int player, struct gameState *state)
     //Step 2 Draw Card
     count = state->handCount[player];//Get current player's hand count
 
-    if (DEBUG){//Debug statements
+    if (DEBUG) {//Debug statements
       printf("Current hand count: %d\n", count);
     }
 
@@ -564,9 +564,10 @@ int drawCard(int player, struct gameState *state)
     state->handCount[player]++;//Increment hand count
   }
 
-  else{
+  //Deck isn't empty
+  else {
     int count = state->handCount[player];//Get current hand count for player
-    int deckCounter;
+    //int deckCounter;
     if (DEBUG){//Debug statements
       printf("Current hand count: %d\n", count);
     }
@@ -657,7 +658,7 @@ int village_card(int current_player, struct gameState *game_state, int hand_posi
   return 0;
 }
 
-int great_hall_card(int current_player, struct gameState *game_state, int hand_position);
+int great_hall_card(int current_player, struct gameState *game_state, int hand_position){
        //+1 Card
       drawCard(current_player, game_state);
 
@@ -672,7 +673,7 @@ int great_hall_card(int current_player, struct gameState *game_state, int hand_p
 
 int smithy_card(int current_player, struct gameState *game_state, int hand_position) {
   //+3 Cards
-  for (i = 1; i <= 3; i++)
+  for (int i = 1; i <= 3; i++)
     drawCard(current_player, game_state);
 
   //Discard Smithy from hand
