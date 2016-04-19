@@ -11,10 +11,10 @@
 
 int main() {
 
-	  int k[10] = {adventurer, gardens, embargo, village, minion, mine, cutpurse, 
+	  int k[10] = {adventurer, gardens, embargo, village, minion, mine, cutpurse,
 	       sea_hag, tribute, smithy};
 
-	  int i, j, n, players, player, handCount, deckCount, seed, address;
+	  int i, players, player = 0, handCount, deckCount, seed;
 	  //struct gameState state;
 	  struct gameState state;
 	  struct gameState stat;
@@ -34,10 +34,10 @@ int main() {
 
 	  for (i = 0; i < MAX_TESTS; i++) {
 
-		  
+
 		 players = rand() % 4;
 		 seed = rand();		//pick random seed
-		
+
 		 initializeGame(players, k, seed, &state);	//initialize Gamestate
 
 		  //Initiate valid state variables
@@ -61,13 +61,13 @@ int main() {
 
 	   for (i = 0; i < MAX_TESTS; i++) {
 
-		   
+
 	  printf("PRE2\n");
 
 	  initializeGame(players, k, seed, &stat);	//initialize Gamestate
 
 	printf("POST\n");
-		
+
 		  //Initiate valid state variables
 		  stat.deckCount[player] = rand() % MAX_DECK; //Pick random deck size out of MAX DECK size
 		  stat.discardCount[player] = rand() % MAX_DECK;
