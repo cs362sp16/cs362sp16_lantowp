@@ -1,6 +1,6 @@
 /* 	Interactive Dominion Interface
 	Version 7
-	
+
 	Sam Heinith CS362
 	Questions/Comments:
 	heiniths@onid.orst.edu
@@ -20,7 +20,7 @@
 #include "rngs.h"
 
 
-int main2(int argc, char *argv[]) {
+void main2(int argc, char *argv[]) {
 	//Default cards, as defined in playDom
 	int k[10] = {adventurer, gardens, embargo, village, minion, mine, cutpurse, sea_hag, tribute, smithy};
 	struct gameState g;
@@ -43,12 +43,12 @@ int main(int argc, char* argv[]) {
 	char *stat = "stat";
 	char *supply = "supp";
 	char *whos = "whos";
-		
+
 	char command[MAX_STRING_LENGTH];
 	char line[MAX_STRING_LENGTH];
 	char cardName[MAX_STRING_LENGTH];
 
-	//Array to hold bot presence 
+	//Array to hold bot presence
 	int isBot[MAX_PLAYERS] = { 0, 0, 0, 0};
 
 	int players[MAX_PLAYERS];
@@ -68,7 +68,7 @@ int main(int argc, char* argv[]) {
 	struct gameState * game = &g;
 
 	memset(game,0,sizeof(struct gameState));
-		
+
 	if(argc != 2){
 		printf("Usage: player [integer random number seed]\n");
 		return EXIT_SUCCESS;
@@ -77,12 +77,12 @@ int main(int argc, char* argv[]) {
 	if(randomSeed <= 0){
 		printf("Usage: player [integer random number seed]\n");
 		return EXIT_SUCCESS;
-	}	
-	
+	}
+
 	initializeGame(2,kCards,randomSeed,game);
 
 	printf("Please enter a command or \"help\" for commands\n");
-	
+
 
 	while(TRUE) {
 		int arg0 = UNUSED;
@@ -94,11 +94,11 @@ int main(int argc, char* argv[]) {
 		strcpy(line,"");
 		strcpy(command,"");
 		strcpy(cardName,"");
-		
+
 		currentPlayer = whoseTurn(game);
-		
+
 		//If you are getting a seg fault comment this if block out
-		gameOver = isGameOver(game); 		
+		gameOver = isGameOver(game);
 		if(gameStarted == TRUE && gameOver == TRUE){
 			printScores(game);
 			getWinners(players, game);
@@ -112,16 +112,16 @@ int main(int argc, char* argv[]) {
 				printDiscard(playerNum, game);
 				printDeck(playerNum, game);
 			}
-			
+
 			break; //Exit out of the game/while loop
-		}         
-		
+		}
+
 
 		if(isBot[currentPlayer] == TRUE) {
 				executeBotTurn(currentPlayer, &turnNum, game);
 				continue;
 		}
-		
+
 		printf("$ ");
 		fgets(line, MAX_STRING_LENGTH, stdin);
 		sscanf(line, "%s %d %d %d %d", command, &arg0, &arg1, &arg2, &arg3);
@@ -149,7 +149,7 @@ int main(int argc, char* argv[]) {
 				printf("Player %d's turn number %d\n\n", currentPlayer, turnNum);
 			}
 
-		} else			
+		} else
 		if(COMPARE(command, exit) == 0) {
 			break;
 		} else
@@ -160,7 +160,7 @@ int main(int argc, char* argv[]) {
 			int numHuman = arg0 - arg1;
 			for(playerNum = numHuman; playerNum < arg0; playerNum++) {
 				isBot[playerNum] = TRUE;
-			}			
+			}
 	//		selectKingdomCards(randomSeed, kCards);  //Comment this out to use the default card set defined in playDom.
 			outcome = initializeGame(arg0, kCards, randomSeed, game);
 			printf("\n");
@@ -208,9 +208,9 @@ int main(int argc, char* argv[]) {
 		if(COMPARE(command, whos) == 0) {
 			int playerNum =	whoseTurn(game);
 			printf("Player %d's turn\n", playerNum);
-		} 
+		}
     	}
-	
+
     	return EXIT_SUCCESS;
 
 }
