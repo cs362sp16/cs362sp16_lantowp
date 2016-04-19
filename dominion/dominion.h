@@ -136,4 +136,11 @@ int great_hall_card(int current_player, struct gameState *game_state, int hand_p
 
 int smithy_card(int current_player, struct gameState *game_state, int hand_position);
 /*The card effect for the Smithy card*/
+
+int outpost_card(int current_player, struct gameState *game_state, int hand_position);
+/*The card effect for the Outpost card*/
+
+int remodel_card(int current_player, struct gameState *game_state, int hand_position);
+/*The card effect for the Remodel card*/
+
 #endif

@@ -685,8 +685,7 @@ int smithy_card(int current_player, struct gameState *game_state, int hand_posit
 int remodel_card(int current_player, struct gameState *game_state, int hand_position) {
   int choice1 = 1;
   int choice2 = 2;
-
-  j = state->hand[current_player][choice1];  //store card we will trash
+  int j = game_state->hand[current_player][choice1];  //store card we will trash
 
   if ((getCost(game_state->hand[current_player][choice1]) + 2) > getCost(choice2)) {
     return 0;
@@ -700,14 +699,30 @@ int remodel_card(int current_player, struct gameState *game_state, int hand_posi
   //Replace discarded card
   drawCard(current_player, game_state);
 
-  //discard trashed card
-  for (i = 1; i < game_state->handCount[current_player]; i+=2) {
+  //Discard trashed card
+  for (int i = 1; i < game_state->handCount[current_player]; i+=2) {
     if (game_state->hand[current_player][i] == j) {
       discardCard(i, current_player, game_state, 1);
       break;
     }
   }
+  return 0;
 }
+
+//Outpost
+int outpost_card(int current_player, struct gameState *game_state, int hand_position) {
+  //set outpost flag
+  game_state->outpostPlayed = hand_position;
+
+  //Discard card
+  discardCard(hand_position, current_player, game_state, -1);
+
+  //Replace discarded card
+  drawCard(current_player, game_state);
+
+  return 1;
+}
+
 
 int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState *state, int handPos, int *bonus)
 {
@@ -1175,12 +1190,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
       return 0;
 
     case outpost:
-      //set outpost flag
-      state->outpostPlayed++;
-
-      //discard card
-      discardCard(handPos, currentPlayer, state, 0);
-      return 0;
+      return outpost_card(currentPlayer, state, handPos);
 
     case salvager:
       //+1 buy
