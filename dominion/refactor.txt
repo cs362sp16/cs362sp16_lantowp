@@ -1,0 +1,3 @@
+Outpost, Remodel, Village, Great Hall, and Smithy have all been refactored as functions.
+They all take hand position, game state, and the current player as inputs. They should
+return 0 on a succesful run.
