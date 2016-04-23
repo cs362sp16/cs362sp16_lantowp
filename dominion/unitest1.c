@@ -11,25 +11,25 @@ int main (int argc, char** argv) {
   int random_num_range = 1000;
 
   srand(time(NULL));
-  
+
   //Compare for less than
   for (int i = 0; i < num_of_compares; i++) {
     int a = rand()%random_num_range;
     int b = a + rand()%random_num_range;
-    assert(compare(a,b) == -1);
+    assert(compare(a,b) == -1 && "Failed less than tests.");
   }
 
   //Compare for greater than
   for (int i = 0; i < num_of_compares; i++) {
     int a = rand()%random_num_range;
     int b = a - rand()%random_num_range;
-    assert(compare(a,b) == 1);
+    assert(compare(a,b) == 1 && "Failed greater than tests.");
   }
 
   //Compare for equal values
   for (int i = 0; i < num_of_compares; i++) {
     int a = rand()%random_num_range;
-    assert(compare(a,a) == 0);
+    assert(compare(a,a) == 0 && "Failed equal to tests.");
   }
 
   return 0;
