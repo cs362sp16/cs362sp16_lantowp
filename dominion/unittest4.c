@@ -19,7 +19,7 @@ int main (int argc, char** argv) {
   //Plays through turns, checking who is active
   for (int current_turn = 0; current_turn < num_of_turns; current_turn++) {
     assert(whoseTurn(game_state) == current_turn%num_of_players
-          && "Wrong player has active turn");
+          && "Wrong player has active turn\n");
     endTurn(game_state);
   }
 

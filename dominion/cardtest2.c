@@ -21,13 +21,13 @@ int main (int argc, char** argv) {
   initial_num_cards = numHandCards(game_state);
   initial_num_actions =
   assert(cardEffect(village, 0, 0, 0, game_state, 0, 0) == 0
-        && "Incorrect return value for Village");
+        && "Incorrect return value for Village\n");
   //Test for 1 card drawn
   assert(numHandCards(game_state) == initial_num_cards
-        && "Village drew wrong number of cards");
+        && "Village drew wrong number of cards\n");
   //Test for +2 actions
   assert(game_state->numActions == initial_num_actions + 1
-        && "Village added an incorrect number of actions");
+        && "Village added an incorrect number of actions\n");
 
   return 0;
 }

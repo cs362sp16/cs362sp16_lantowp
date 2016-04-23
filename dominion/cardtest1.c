@@ -20,10 +20,10 @@ int main (int argc, char** argv) {
   //Test for correct return value
   initial_num_cards = numHandCards(game_state);
   assert(cardEffect(smithy, 0, 0, 0, game_state, 0, 0) == 0
-        && "Incorrect return value for Smithy");
+        && "Incorrect return value for Smithy\n");
   //Test for 3 cards drawn
   assert(numHandCards(game_state) == initial_num_cards + 2
-        && "Smithy drew wrong number of cards");
+        && "Smithy drew wrong number of cards\n");
 
   return 0;
 }

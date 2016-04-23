@@ -16,18 +16,18 @@ int main (int argc, char** argv) {
         &numHandCards(struct gameState *game_state));
 
   //Initial Test
-  assert(isGameOver(game_state) == 0 && "Initial game registered as game over.");
+  assert(isGameOver(game_state) == 0 && "Initial game registered as game over.\n");
 
   //Test for empty province stack
   game_state->supplyCount[province] = 0;
-  assert(isGameOver(game_state) == 1 && "Game continues despite empty province stack.");
+  assert(isGameOver(game_state) == 1 && "Game continues despite empty province stack.\n");
   game_state->supplyCount[province] = 1;
 
   //Test for 3 supply decks empty ending
   state->supplyCount[0] = 0;
   state->supplyCount[1] = 0;
   state->supplyCount[2] = 0;
-  assert(isGameOver(game_state) == 1 && "Game continues despite 3 empty supply decks.");
+  assert(isGameOver(game_state) == 1 && "Game continues despite 3 empty supply decks.\n");
 
   return 0;
 }
