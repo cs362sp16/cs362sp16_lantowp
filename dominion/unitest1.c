@@ -11,6 +11,7 @@ int main (int argc, char** argv) {
   int random_num_range = 1000;
 
   srand(time(NULL));
+  
   //Compare for less than
   for (int i = 0; i < num_of_compares; i++) {
     int a = rand()%random_num_range;
