@@ -13,21 +13,23 @@ int main (int argc, char** argv) {
   printf ("Starting game.\n");
 
   initializeGame(num_of_players, cards, atoi(argv[1]),
-        &numHandCards(struct gameState *game_state));
+        &game_state);
 
   //Initial Test
-  assert(isGameOver(game_state) == 0 && "Initial game registered as game over.\n");
+  assert(isGameOver(&game_state) == 0 && "Initial game registered as game over.\n");
 
   //Test for empty province stack
-  game_state->supplyCount[province] = 0;
-  assert(isGameOver(game_state) == 1 && "Game continues despite empty province stack.\n");
-  game_state->supplyCount[province] = 1;
+  game_state.supplyCount[province] = 0;
+  assert(isGameOver(&game_state) == 1 && "Game continues despite empty province stack.\n");
+  game_state.supplyCount[province] = 1;
 
   //Test for 3 supply decks empty ending
-  state->supplyCount[0] = 0;
-  state->supplyCount[1] = 0;
-  state->supplyCount[2] = 0;
-  assert(isGameOver(game_state) == 1 && "Game continues despite 3 empty supply decks.\n");
+  game_state.supplyCount[0] = 0;
+  game_state.supplyCount[1] = 0;
+  game_state.supplyCount[2] = 0;
+  assert(isGameOver(&game_state) == 1 && "Game continues despite 3 empty supply decks.\n");
+
+  printf ("All tests passed for isGameOver()\n");
 
   return 0;
 }
