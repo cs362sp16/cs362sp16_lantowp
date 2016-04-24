@@ -3,34 +3,34 @@
 #include <stdio.h>
 #include "rngs.h"
 #include <stdlib.h>
-#include <time.h>
-#include <stdlib.h>
 
 int main (int argc, char** argv) {
-  int num_of_compares = 1000000;
-  int random_num_range = 1000;
+  struct gameState game_state;
+  int num_of_players = 2;
+  int cards[10] = {adventurer, gardens, embargo, village, minion, mine, cutpurse,
+	       sea_hag, tribute, smithy};
+  int init_hand_size;
+  int total_draws = 5;
 
-  srand(time(NULL));
+  printf ("Starting game.\n");
 
-  //Compare for less than
-  for (int i = 0; i < num_of_compares; i++) {
-    int a = rand()%random_num_range;
-    int b = a + rand()%random_num_range;
-    assert(compare(a,b) == -1 && "Failed less than tests.\n");
+  initializeGame(num_of_players, cards, atoi(argv[1]), &game_state);
+
+  //Test if a card is drawn
+  init_hand_size = numHandCards(&game_state);
+  for (int num_of_draws = 1; num_of_draws <= total_draws; num_of_draws++) {
+    drawCard(game_state.whoseTurn, &game_state);
+    assert(numHandCards(&game_state) == init_hand_size + num_of_draws &&
+          "Drawn hand size isn't correct\n");
   }
 
-  //Compare for greater than
-  for (int i = 0; i < num_of_compares; i++) {
-    int a = rand()%random_num_range;
-    int b = a - rand()%random_num_range;
-    assert(compare(a,b) == 1 && "Failed greater than tests.\n");
+  //Test if hand has cards
+  for (int i = 0; i < init_hand_size + total_draws; i++) {
+    assert(game_state.hand[game_state.whoseTurn][i] != 0 &&
+          "Invalid cards added\n");
   }
 
-  //Compare for equal values
-  for (int i = 0; i < num_of_compares; i++) {
-    int a = rand()%random_num_range;
-    assert(compare(a,a) == 0 && "Failed equal to tests.\n");
-  }
+  printf ("All tests passed for drawCard()\n");
 
   return 0;
 }
