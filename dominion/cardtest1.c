@@ -9,21 +9,21 @@ int main (int argc, char** argv) {
   int num_of_players = 2;
   int cards[10] = {adventurer, gardens, embargo, village, minion, mine, cutpurse,
 	       sea_hag, tribute, smithy};
-  int smithy = "smithy";
   int initial_num_cards;
 
   printf ("Starting game.\n");
 
-  initializeGame(num_of_players, cards, atoi(argv[1]),
-        &numHandCards(struct gameState *game_state));
+  initializeGame(num_of_players, cards, atoi(argv[1]), &game_state);
 
   //Test for correct return value
-  initial_num_cards = numHandCards(game_state);
-  assert(cardEffect(smithy, 0, 0, 0, game_state, 0, 0) == 0
+  initial_num_cards = numHandCards(&game_state);
+  assert(cardEffect(smithy, 0, 0, 0, &game_state, 0, 0) == 0
         && "Incorrect return value for Smithy\n");
   //Test for 3 cards drawn
-  assert(numHandCards(game_state) == initial_num_cards + 2
+  assert(numHandCards(&game_state) == initial_num_cards + 2
         && "Smithy drew wrong number of cards\n");
+
+  printf ("All tests passed for Smithy\n");
 
   return 0;
 }

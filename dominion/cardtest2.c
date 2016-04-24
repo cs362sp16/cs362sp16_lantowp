@@ -14,20 +14,23 @@ int main (int argc, char** argv) {
 
   printf ("Starting game.\n");
 
-  initializeGame(num_of_players, cards, atoi(argv[1]),
-        &numHandCards(struct gameState *game_state));
+  initializeGame(num_of_players, cards, atoi(argv[1]), &game_state);
 
   //Test for correct return value
-  initial_num_cards = numHandCards(game_state);
-  initial_num_actions =
-  assert(cardEffect(village, 0, 0, 0, game_state, 0, 0) == 0
+  initial_num_cards = numHandCards(&game_state);
+  initial_num_actions = game_state.numActions;
+  assert(cardEffect(village, 0, 0, 0, &game_state, 0, 0) == 0
         && "Incorrect return value for Village\n");
+
   //Test for 1 card drawn
-  assert(numHandCards(game_state) == initial_num_cards
+  assert(numHandCards(&game_state) == initial_num_cards
         && "Village drew wrong number of cards\n");
+        
   //Test for +2 actions
-  assert(game_state->numActions == initial_num_actions + 1
+  assert(game_state.numActions == initial_num_actions + 1
         && "Village added an incorrect number of actions\n");
+
+  printf ("All tests passed for Village\n");
 
   return 0;
 }

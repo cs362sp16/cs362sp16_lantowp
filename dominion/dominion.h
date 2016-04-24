@@ -143,10 +143,10 @@ int outpost_card(int current_player, struct gameState *game_state, int hand_posi
 int remodel_card(int current_player, struct gameState *game_state, int hand_position);
 /*The card effect for the Remodel card*/
 
-int compare(const void* a, const void* b);
-/*Compares two values*/
-
 int drawCard(int player, struct gameState *state);
 /*Draws a card*/
+
+int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState *state, int handPos, int *bonus);
+/*Handles the effects of all the cards in the game*/
 
 #endif

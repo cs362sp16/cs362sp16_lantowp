@@ -13,15 +13,16 @@ int main (int argc, char** argv) {
 
   printf ("Starting game.\n");
 
-  initializeGame(num_of_players, cards, atoi(argv[1]),
-        &numHandCards(struct gameState *game_state));
+  initializeGame(num_of_players, cards, atoi(argv[1]), &game_state);
 
   //Plays through turns, checking who is active
-  for (int current_turn = 0; current_turn < num_of_turns; current_turn++) {
-    assert(whoseTurn(game_state) == current_turn%num_of_players
+  for(int current_turn = 0; current_turn < num_of_turns; current_turn++) {
+    assert(whoseTurn(&game_state) == current_turn%num_of_players
           && "Wrong player has active turn\n");
-    endTurn(game_state);
+    endTurn(&game_state);
   }
+
+  printf ("All tests passed for whoseTurn()\n");
 
   return 0;
 }

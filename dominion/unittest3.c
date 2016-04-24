@@ -12,8 +12,7 @@ int main (int argc, char** argv) {
 
   printf ("Starting game.\n");
 
-  initializeGame(num_of_players, cards, atoi(argv[1]),
-        &game_state);
+  initializeGame(num_of_players, cards, atoi(argv[1]), &game_state);
 
   //Initial Test
   assert(isGameOver(&game_state) == 0 && "Initial game registered as game over.\n");
