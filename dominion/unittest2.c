@@ -12,15 +12,17 @@ int main (int argc, char** argv) {
 
   printf ("Starting game.\n");
 
-  initializeGame(num_of_players, cards, atoi(argv[1]),
-      &numHandCards(struct gameState *game_state));
+  initializeGame(num_of_players, cards, atoi(argv[1]), &game_state);
 
   //Test intial hand size
-  assert(numHandCards(game_state) == 5 && "Initial hand size isn't 5\n");
+  assert(numHandCards(&game_state) == 5 && "Initial hand size isn't 5\n");
 
   //Test if a card is drawn
-  drawCard(game_state->whoseTurn, game_state);
-  assert(numHandCards(game_state) == 6 && "Drawn hand size isn't 6\n");
+  drawCard(game_state.whoseTurn, &game_state);
+  assert(numHandCards(&game_state) == 6 && "Drawn hand size isn't 6\n");
+
+  printf ("All tests passed for numHandCards()\n");
+
 
   return 0;
 }
