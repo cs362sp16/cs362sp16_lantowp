@@ -1,0 +1,23 @@
+File 'unittest1.c'
+Lines executed:16.80% of 649
+
+File 'unittest2.c'
+Lines executed:16.80% of 649
+
+File 'unittest3.c'
+Lines executed:100.00% of 14
+
+File 'unittest4.c'
+Lines executed:100.00% of 10
+
+File 'cardtest1.c'
+Lines executed:100.00% of 9
+
+File 'cardtest2.c'
+Lines executed:0.00% of 11
+
+File 'cardtest3.c'
+Lines executed:100.00% of 16
+
+File 'cardtest4.c'
+Lines executed:0.00% of 13
