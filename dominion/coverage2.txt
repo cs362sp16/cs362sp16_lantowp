@@ -5,19 +5,23 @@ File 'unittest2.c'
 Lines executed:16.80% of 649
 
 File 'unittest3.c'
-Lines executed:100.00% of 14
+Lines executed:22.50% of 649
 
 File 'unittest4.c'
-Lines executed:100.00% of 10
+Lines executed:29.43% of 649
 
 File 'cardtest1.c'
-Lines executed:100.00% of 9
+Lines executed:31.12% of 649
 
 File 'cardtest2.c'
-Lines executed:0.00% of 11
+Lines executed:0.00% of 649
 
 File 'cardtest3.c'
-Lines executed:100.00% of 16
+Lines executed:21.42% of 649
 
 File 'cardtest4.c'
-Lines executed:0.00% of 13
+Lines executed:0.00% of 649
+
+What can be drawn is that unittest1 and unittest2 test the same exact lines of code since they have the exact same coverage amount.
+Cardtest2 and Cardtest4 are failing tests and don't have any coverage.
+Cardtest1 and Unittest4 have the most coverage, but that doesn't mean they test the most, since both call functions that are tested outside of their test.
