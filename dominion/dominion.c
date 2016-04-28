@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
+#include <time.h>
+#include <stdlib.h>
 
 int compare(const void* a, const void* b) {
   if (*(int*)a > *(int*)b)
@@ -680,6 +682,7 @@ int remodel_card(int current_player, struct gameState *game_state, int hand_posi
   int choice1 = 1;
   int choice2 = 2;
   int j = game_state->hand[current_player][choice1];  //store card we will trash
+  int i;
 
   if ((getCost(game_state->hand[current_player][choice1]) + 2) > getCost(choice2)) {
     return 0;
@@ -694,7 +697,7 @@ int remodel_card(int current_player, struct gameState *game_state, int hand_posi
   drawCard(current_player, game_state);
 
   //Discard trashed card
-  for (int i = 1; i < game_state->handCount[current_player]; i+=2) {
+  for (i = 1; i < game_state->handCount[current_player]; i+=2) {
     if (game_state->hand[current_player][i] == j) {
       discardCard(i, current_player, game_state, 1);
       break;

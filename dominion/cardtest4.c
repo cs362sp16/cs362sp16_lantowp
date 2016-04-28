@@ -4,6 +4,14 @@
 #include "rngs.h"
 #include <stdlib.h>
 
+void my_assert(int passed, char *message) {
+  //Test failed
+  if (passed == 0) {
+    printf("TEST FAILED:\n%s", message);
+    exit(1);
+  }
+}
+
 int main (int argc, char** argv) {
   struct gameState game_state;
   int num_of_players = 2;
@@ -19,21 +27,21 @@ int main (int argc, char** argv) {
   //Test for correct return value
   initial_num_cards = numHandCards(&game_state);
   initial_num_buy = game_state.numBuys;
-  assert(cardEffect(village, 0, 0, 0, &game_state, 0, 0) == 0
-        && "Incorrect return value for Council Room\n");
+  my_assert(cardEffect(village, 0, 0, 0, &game_state, 0, 0) == 0,
+        "Incorrect return value for Council Room\n");
 
   //Test for 4 cards drawn
-  assert(numHandCards(&game_state) == initial_num_cards + 3
-        && "Council Room drew wrong number of cards\n");
+  my_assert(numHandCards(&game_state) == initial_num_cards + 3,
+        "Council Room drew wrong number of cards\n");
 
   //Test for +1 buy
-  assert(game_state.numBuys == initial_num_buy + 1
-        && "Council Room added an incorrect number of buys\n");
+  my_assert(game_state.numBuys == initial_num_buy + 1,
+        "Council Room added an incorrect number of buys\n");
 
   //Test for opponent's card drawn
   endTurn(&game_state);
-  assert(numHandCards(&game_state) == initial_num_cards + 1
-        && "Council Room drew wrong number of cards for opponent\n");
+  my_assert(numHandCards(&game_state) == initial_num_cards + 1,
+        "Council Room drew wrong number of cards for opponent\n");
 
   printf ("All tests passed for Council Room\n");
 

@@ -4,6 +4,14 @@
 #include "rngs.h"
 #include <stdlib.h>
 
+void my_assert(int passed, char *message) {
+  //Test failed
+  if (passed == 0) {
+    printf("TEST FAILED:\n%s", message);
+    exit(1);
+  }
+}
+
 int main (int argc, char** argv) {
   struct gameState game_state;
   int num_of_players = 3;
@@ -17,8 +25,8 @@ int main (int argc, char** argv) {
 
   //Plays through turns, checking who is active
   for(int current_turn = 0; current_turn < num_of_turns; current_turn++) {
-    assert(whoseTurn(&game_state) == current_turn%num_of_players
-          && "Wrong player has active turn\n");
+    my_assert(whoseTurn(&game_state) == current_turn%num_of_players,
+          "Wrong player has active turn\n");
     endTurn(&game_state);
   }
 
