@@ -4,12 +4,15 @@
 #include "rngs.h"
 #include <stdlib.h>
 
-void my_assert(int passed, char *message) {
+int my_assert(int passed, char *message) {
   //Test failed
   if (passed == 0) {
     printf("TEST FAILED:\n%s", message);
-    exit(1);
+    return 1;
   }
+
+  //Test passed
+  return 0;
 }
 
 int main (int argc, char** argv) {
@@ -23,14 +26,17 @@ int main (int argc, char** argv) {
   initializeGame(num_of_players, cards, atoi(argv[1]), &game_state);
 
   //Test intial hand size
-  my_assert(numHandCards(&game_state) == 5, "Initial hand size isn't 5\n");
+  if (my_assert(numHandCards(&game_state) == 5, "Initial hand size isn't 5\n")) {
+    return 0;
+  }
 
   //Test if a card is drawn
   drawCard(game_state.whoseTurn, &game_state);
-  my_assert(numHandCards(&game_state) == 6, "Drawn hand size isn't 6\n");
+  if (my_assert(numHandCards(&game_state) == 6, "Drawn hand size isn't 6\n")) {
+    return 0;
+  }
 
   printf ("All tests passed for numHandCards()\n");
-
 
   return 0;
 }

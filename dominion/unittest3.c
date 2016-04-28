@@ -4,12 +4,15 @@
 #include "rngs.h"
 #include <stdlib.h>
 
-void my_assert(int passed, char *message) {
+int my_assert(int passed, char *message) {
   //Test failed
   if (passed == 0) {
     printf("TEST FAILED:\n%s", message);
-    exit(1);
+    return 1;
   }
+
+  //Test passed
+  return 0;
 }
 
 int main (int argc, char** argv) {
@@ -23,18 +26,27 @@ int main (int argc, char** argv) {
   initializeGame(num_of_players, cards, atoi(argv[1]), &game_state);
 
   //Initial Test
-  my_assert(isGameOver(&game_state) == 0, "Initial game registered as game over.\n");
+  if (my_assert(isGameOver(&game_state) == 0,
+  "Initial game registered as game over.\n")) {
+    return 0;
+  }
 
   //Test for empty province stack
   game_state.supplyCount[province] = 0;
-  my_assert(isGameOver(&game_state) == 1, "Game continues despite empty province stack.\n");
+  if (my_assert(isGameOver(&game_state) == 1,
+  "Game continues despite empty province stack.\n")) {
+    return 0;
+  }
   game_state.supplyCount[province] = 1;
 
   //Test for 3 supply decks empty ending
   game_state.supplyCount[0] = 0;
   game_state.supplyCount[1] = 0;
   game_state.supplyCount[2] = 0;
-  my_assert(isGameOver(&game_state) == 1, "Game continues despite 3 empty supply decks.\n");
+  if (my_assert(isGameOver(&game_state) == 1,
+  "Game continues despite 3 empty supply decks.\n")) {
+    return 0;
+  }
 
   printf ("All tests passed for isGameOver()\n");
 
