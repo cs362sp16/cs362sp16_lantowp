@@ -1,0 +1,4 @@
+I enjoy being able to have a code coverage percentage available, but I wish there was an easier way to see which functions
+had coverage and which didn't. I also found that I needed to use functions within the program to help with the tests, 
+which means that if this were a full project I would need to create tests for those functions as well. Testing for complicated
+functions with no return value seems like it'll be difficult going forward.
