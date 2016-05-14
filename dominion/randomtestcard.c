@@ -7,7 +7,7 @@
 #include <time.h>
 
 
-//This randomly tests Adventurer
+//This randomly tests Village
 
 int my_assert(int passed, char *message) {
   //Test failed
@@ -23,9 +23,8 @@ int my_assert(int passed, char *message) {
 int main() {
 	  int k[10] = {adventurer, gardens, embargo, village, minion, mine, cutpurse,
 	       sea_hag, tribute, treasure_map};
-	  int i, j, players, handCount, deckCount, seed, treasure_count;
-		int treasure_total = 2;
-		int init_treasure_total;
+	  int i, j, players, handCount, deckCount, seed;
+		int initial_num_actions;
 		int player = 0;
 		int num_tests = 200;
 
@@ -52,41 +51,24 @@ int main() {
 			//Copy state variables
 			handCount = state.handCount[player];
 			deckCount = state.deckCount[player];
+			initial_num_actions = state.numActions;
 
-			//Count amount of treasure
-			init_treasure_total = 0;
-			for (j = 0; j < handCount; j++) {
-				if (state.hand[0][j] == copper || state.hand[0][j] == silver ||
-				state.hand[0][j] == gold) {
-					init_treasure_total++;
-				}
-			}
-
-			cardEffect(adventurer, 1, 1, 1, &state, 0, 0);		//Run adventurer card
-
-			//Test card was played and two cards were added
-		  if (my_assert(numHandCards(&state) == handCount + 1, "Incorrect hand size from card\n")) {
+			//Test for correct return value
+		  if (my_assert(cardEffect(village, 0, 0, 0, &state, 0, 0) == 0,
+		  "Incorrect return value for Village\n")) {
 		    return 0;
 		  }
 
-			//Check for two treasures
-			treasure_count = 0;
-			for (j = 0; j < handCount + 1; j++) {
-				if (state.hand[0][j] == copper || state.hand[0][j] == silver ||
-				state.hand[0][j] == gold) {
-					treasure_count++;
-				}
-			}
-			if (my_assert(treasure_count == init_treasure_total - treasure_total,
-			"Incorrect amount of treasure\n")) {
-				return 0;
-			}
+		  //Test for 1 card drawn
+		  if (my_assert(numHandCards(&state) == handCount, "Village drew wrong number of cards\n")) {
+		    return 0;
+		  }
 
-			//Check that the treasures were removed from the deck
-			if (my_assert(state.deckCount[player] <= deckCount - treasure_total,
-			"Treasure wasn't removed from the deck\n")) {
-				return 0;
-			}
+		  //Test for +2 actions
+		  if (my_assert(state.numActions == initial_num_actions + 1,
+		  "Village added an incorrect number of actions\n")) {
+		    return 0;
+		  }
 
 			//Clean State
 			for (j = 0; j < MAX_PLAYERS; j++) {
