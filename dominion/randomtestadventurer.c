@@ -21,22 +21,28 @@ int my_assert(int passed, char *message) {
 }
 
 int main() {
-	  int k[10] = {adventurer, gardens, embargo, village, minion, mine, cutpurse,
+		int k[10];
+	  int cards[10] = {adventurer, gardens, embargo, village, minion, mine, cutpurse,
 	       sea_hag, tribute, treasure_map};
 	  int i, j, players, handCount, deckCount, seed, treasure_count;
 		int treasure_total = 2;
 		int init_treasure_total;
+		int deck_size = 10;
 		int player = 0;
 		int num_tests = 200;
 
 	  struct gameState state;
 
-		// srand(time(NULL));
+		srand(treasure_total);
+
+		//Random deck
+		for (j = 0; j < deck_size; j++) {
+			k[j] = cards[rand()%deck_size];
+		}
 
 	  printf("Running Random Adventurer Test\n");
 
 	  for (i = 0; i < num_tests; i++) {
-			printf("%d\n",i);
 			players = rand() % MAX_PLAYERS;
 
 			seed = rand();		//pick random seed
@@ -47,7 +53,6 @@ int main() {
 			state.deckCount[player] = rand() % MAX_DECK; //Pick random deck size out of MAX DECK size
 			state.discardCount[player] = rand() % MAX_DECK;
 			state.handCount[player] = rand() % MAX_HAND;
-
 
 			//Copy state variables
 			handCount = state.handCount[player];
