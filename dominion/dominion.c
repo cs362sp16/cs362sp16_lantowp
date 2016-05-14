@@ -768,8 +768,6 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
         // discard all cards in play that have been drawn
         z = z - 1;
       }
-      printf("return\n");
-      fflush(stdout);
       return 0;
 
     case council_room:
