@@ -53,6 +53,7 @@ int main() {
 			state.deckCount[player] = rand() % MAX_DECK; //Pick random deck size out of MAX DECK size
 			state.discardCount[player] = rand() % MAX_DECK;
 			state.handCount[player] = rand() % MAX_HAND;
+			state.numActions = rand();
 
 			//Copy state variables
 			handCount = state.handCount[player];
