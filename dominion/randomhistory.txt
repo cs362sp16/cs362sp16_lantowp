@@ -1,0 +1,14 @@
+Improvements:
+-Both testers compile now
+-Refactored the code so that 233 tests could be performed before memory issues break it, a 1566% improvement from the
+original 12.
+-Added tests so that both cards are actually tested.
+-Shuffled up the deck for additional randomization.
+-Added random numbers of actions.
+
+An early error I found in my tests was that if there were already were treasure cards in hand, then adventure would fail the
+tests even though it had correctly added two treasure cards. 
+
+My assumption for the Village card was the the player would have only one action, which would be expended on playing Village.
+However, this proved to be a faulty assumption and I expanded the test to be for the difference in actions from when the card
+was played to afterwards.
