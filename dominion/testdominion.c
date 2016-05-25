@@ -73,37 +73,34 @@ int main (int argc, char** argv) {
   struct gameState G;
   struct gameState *state = &G;
 
-  char *card_name = NULL;
-
-  int i, j, random_number, card_bought, random_card, card_played, choice1, choice2, choice3;
+  int i, j, card_bought, random_card, card_played, choice1, choice2, choice3;
   // int money = 0;
   int num_players = 2 + rand()%3;
   int num_cards = 25;
   int deck_size = 10;
-  int num_possible = 13;
-  int kingdomCards[10] = {adventurer, gardens, embargo, village, minion, mine,
-        cutpurse, feast, tribute, smithy};
-  // int kingdomCards[deck_size];
-  // int possible_cards[13] = {adventurer, gardens, embargo, village, minion, mine,
-  //       cutpurse, sea_hag, tribute, smithy, council_room, feast, remodel};
-  // int random_array[deck_size];
-  //
-  //
-  // //Seed the deck
-  // for(i = 0; i < deck_size; i++) {
-  //   random_array[i] = rand()%num_possible;
-  //   for(j = 0; j < deck_size; j++) {
-  //     if(random_array[i] == random_array[j]) {
-  //       i--;
-  //       break;
-  //     }
-  //   }
-  // }
-  //
-  //
-  // for (i = 0; i < deck_size; i++) {
-  //   kingdomCards[i] = random_array[i];
-  // }
+  int num_possible = 16;
+  // int kingdomCards[10] = {adventurer, gardens, embargo, village, minion, mine,
+  //       cutpurse, feast, tribute, smithy};
+  int kingdomCards[deck_size];
+  int possible_cards[16] = {adventurer, gardens, embargo, village, minion, mine,
+        cutpurse, tribute, smithy, council_room, feast, remodel, duchy, baron,
+        great_hall, ambassador,};
+  int random_array[deck_size];
+
+  //Seed the deck
+  for (i = 0; i < deck_size; i++) {
+    random_array[i] = rand()%num_possible;
+    for (j = 0; j < i; j++) {
+      if(random_array[i] == random_array[j]) {
+        i--;
+        break;
+      }
+    }
+  }
+
+  for (i = 0; i < deck_size; i++) {
+    kingdomCards[i] = possible_cards[random_array[i]];
+  }
 
   printf("Starting game with %d players.\n", num_players);
 
