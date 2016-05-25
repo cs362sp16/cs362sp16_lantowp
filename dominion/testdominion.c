@@ -117,19 +117,6 @@ int main (int argc, char** argv) {
     //Current state
     printState(state);
 
-    //Buy a card
-    card_bought = 0;
-    i = 0;
-    while(!card_bought && i < num_cards) {
-      random_card = kingdomCards[rand()%deck_size];
-      if(buyCard(random_card, state) != -1) {
-        card_bought = 1;
-        printf("Player %d bought %s for %d coins.\n", state->whoseTurn,
-              get_card_name(random_card), getCost(random_card));
-      }
-      i++;
-    }
-
     //Play a card
     for (i = 0; i < numHandCards(state); i++) {
       card_played = handCard(i, state);
@@ -139,14 +126,39 @@ int main (int argc, char** argv) {
 
       if(playCard(i, choice1, choice2, choice3, state) != -1) {
         printf("Player %d played %s.\n", state->whoseTurn, get_card_name(card_played));
-        printf("Choice 1: %d, Choice 2: %d, Choice 3: %d\n",choice1, choice2, choice3);
+        printf("Choice 1: %d, Choice 2: %d, Choice 3: %d\n\n",choice1, choice2, choice3);
       }
     }
-    printf("Ending Player %d's turn.\n\n",state->whoseTurn);
+
+    //Buying phase
+    printf("Buying phase\n");
+    card_bought = 0;
+    i = 0;
+    while(!card_bought && i < num_cards) {
+      random_card = kingdomCards[rand()%deck_size];
+      if (i == 0 && rand()%(deck_size-1) == 0) {
+        random_card = gold;
+      }
+      if (i == 1 && rand()%(deck_size-1) == 0) {
+        random_card = silver;
+      }
+      if (i == 2 && rand()%(deck_size-1) == 0) {
+        random_card = copper;
+      }
+      if(buyCard(random_card, state) != -1) {
+        card_bought = 1;
+        printf("Player %d bought %s for %d coins.\n", state->whoseTurn,
+              get_card_name(random_card), getCost(random_card));
+      }
+      i++;
+    }
+
+    printf("\nEnding Player %d's turn.\n\n",state->whoseTurn);
     //end turn
     endTurn(state);
   }
 
+  //End Game
   printf("\n\n");
   printScores(state);
 
