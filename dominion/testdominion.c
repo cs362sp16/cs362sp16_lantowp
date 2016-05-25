@@ -75,14 +75,14 @@ int main (int argc, char** argv) {
 
   char *card_name = NULL;
 
-  int i, j, random_number, card_bought, random_card;
+  int i, j, random_number, card_bought, random_card, card_played, choice1, choice2, choice3;
   // int money = 0;
   int num_players = 2 + rand()%3;
   int num_cards = 25;
   int deck_size = 10;
   int num_possible = 13;
   int kingdomCards[10] = {adventurer, gardens, embargo, village, minion, mine,
-        cutpurse, sea_hag, tribute, smithy};
+        cutpurse, feast, tribute, smithy};
   // int kingdomCards[deck_size];
   // int possible_cards[13] = {adventurer, gardens, embargo, village, minion, mine,
   //       cutpurse, sea_hag, tribute, smithy, council_room, feast, remodel};
@@ -122,10 +122,6 @@ int main (int argc, char** argv) {
     i = 0;
     while(!card_bought && i < num_cards) {
       random_card = kingdomCards[rand()%deck_size];
-      // cardNumToName(random_card, card_name);
-      // printf("We wish %d bought %s for %d coins.\n", state->whoseTurn, card_name,
-      //       getCost(random_card));
-      // fflush(stdout);
       if(buyCard(random_card, state) != -1) {
         card_bought = 1;
         printf("Player %d bought %s for %d coins.\n", state->whoseTurn,
@@ -136,13 +132,22 @@ int main (int argc, char** argv) {
 
     //Play a card
     for (i = 0; i < numHandCards(state); i++) {
+      card_played = handCard(i, state);
+      choice1 = rand()%2+1;
+      choice2 = rand()%2+1;
+      choice3 = rand()%2+1;
 
+      if(playCard(i, choice1, choice2, choice3, state) != -1) {
+        printf("Player %d played %s.\n", state->whoseTurn, get_card_name(card_played));
+        printf("Choice 1: %d, Choice 2: %d, Choice 3: %d\n",choice1, choice2, choice3);
+      }
     }
-
+    printf("Ending Player %d's turn.\n\n",state->whoseTurn);
     //end turn
     endTurn(state);
   }
 
+  printf("\n\n");
   printScores(state);
 
   return 0;

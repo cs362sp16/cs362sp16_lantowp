@@ -1,5 +1,5 @@
 /* 	Interactive Dominion Interface
-	
+
 Sam Heinith CS362
 1/26/2010
 */
@@ -270,7 +270,7 @@ void phaseNumToName(int phase, char *name) {
   case BUY_PHASE: strcpy(name,"Buy");
     break;
   case CLEANUP_PHASE: strcpy(name,"Cleanup");
-    break;	
+    break;
   }
 }
 
@@ -291,8 +291,8 @@ void selectKingdomCards(int randomSeed, int kingCards[NUM_K_CARDS]) {
    int i, used, card, numSelected = 0;
    SelectStream(1);
 	PutSeed((long)randomSeed);
- 
-	
+
+
   while(numSelected < NUM_K_CARDS) {
     used = FALSE;
     card = floor(Random() * NUM_TOTAL_K_CARDS);
@@ -312,7 +312,7 @@ void selectKingdomCards(int randomSeed, int kingCards[NUM_K_CARDS]) {
 
 int countHandCoins(int player, struct gameState *game) {
   int card, index, coinage = 0;
-	
+
   for(index = 0; index < game->handCount[player]; index++) {
     card = game->hand[player][index];
     switch(card) {
@@ -330,11 +330,11 @@ int countHandCoins(int player, struct gameState *game) {
 
 void executeBotTurn(int player, int *turnNum, struct gameState *game) {
   int coins = countHandCoins(player, game);
-	
+
   printf("*****************Executing Bot Player %d Turn Number %d*****************\n", player, *turnNum);
-  printSupply(game);	
+  printSupply(game);
   //sleep(1); //Thinking...
-	
+
   if(coins >= PROVINCE_COST && supplyCount(province,game) > 0) {
     buyCard(province,game);
     printf("Player %d buys card Province\n\n", player);
@@ -353,7 +353,7 @@ void executeBotTurn(int player, int *turnNum, struct gameState *game) {
 
   }
 
-	
+
   if(player == (game->numPlayers -1)) (*turnNum)++;
   endTurn(game);
   if(! isGameOver(game)) {
