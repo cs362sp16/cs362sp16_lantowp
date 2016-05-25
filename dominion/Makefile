@@ -120,10 +120,9 @@ runtests: testDrawCard
 
 testdominion: dominion.o interface.o testdominion.c
 	rm -f dominion.c.gcov dominion.gcda dominion.gcno gameResults.out testdominion.out
-	gcc -o testdominion testdominion.c -g dominion.o interface.o rngs.o $(CFLAGS)
+	gcc -fprofile-arcs -ftest-coverage -Wall -std=c99 dominion.c testdominion.c interface.c rngs.c -o testdominion -lm -g
 	./testdominion 1 >> gameResults.out
 	gcov dominion.c >> testdominion.out
-
 
 player: player.c interface.o
 	gcc -o player player.c -g  dominion.o rngs.o interface.o $(CFLAGS)
