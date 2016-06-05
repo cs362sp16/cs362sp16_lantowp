@@ -1,0 +1,6 @@
+The full diff can be found here: https://www.diffchecker.com/ukeubr50. The comparison was made with foulgerd's code.
+
+There were 207 removals and 183 additions. Both games had the same number of players, 3. 
+The games played exactly the same, until about 15 turns in which foulgerd purchased a Smithy instead of Silver.
+From this divergence points the games continued to play slightly different from each other. I can only assume the difference
+is due to the random seed eventually diverging after several hundred numbers had been generated.
