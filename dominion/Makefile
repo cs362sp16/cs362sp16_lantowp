@@ -110,6 +110,48 @@ myTest:
 	gcov dominion.c >> unittestresult.out
 	cat dominion.c.gcov >> unittestresult.out
 
+tarantulaTest:
+	rm -f dominion.c.gcov dominion.gcda dominion.gcno unit_test1.out tarantula.out
+	gcc -fprofile-arcs -ftest-coverage -Wall -std=c99 dominion.c unit_test1.c rngs.c -o unittest1 -lm -g
+	./unittest1 1 >> unit_test1.out
+	gcov dominion.c
+	cat dominion.c.gcov >> unit_test1.out
+	rm -f dominion.c.gcov dominion.gcda dominion.gcno unit_test2.out
+	gcc -fprofile-arcs -ftest-coverage -Wall -std=c99 dominion.c unit_test2.c rngs.c -o unittest2 -lm -g
+	./unittest2 1 >> unit_test2.out
+	gcov dominion.c
+	cat dominion.c.gcov >> unit_test2.out
+	rm -f dominion.c.gcov dominion.gcda dominion.gcno unit_test3.out
+	gcc -fprofile-arcs -ftest-coverage -Wall -std=c99 dominion.c unit_test3.c rngs.c -o unittest3 -lm -g
+	./unittest3 1 >> unit_test3.out
+	gcov dominion.c
+	cat dominion.c.gcov >> unit_test3.out
+	rm -f dominion.c.gcov dominion.gcda dominion.gcno unit_test4.out
+	gcc -fprofile-arcs -ftest-coverage -Wall -std=c99 dominion.c unit_test4.c rngs.c -o unittest4 -lm -g
+	./unittest4 1 >> unit_test4.out
+	gcov dominion.c
+	cat dominion.c.gcov >> unit_test4.out
+	rm -f dominion.c.gcov dominion.gcda dominion.gcno card_test1.out
+	gcc -fprofile-arcs -ftest-coverage -Wall -std=c99 dominion.c card_test1.c rngs.c -o cardtest1 -lm -g
+	./cardtest1 1 >> card_test1.out
+	gcov dominion.c
+	cat dominion.c.gcov >> card_test1.out
+	rm -f dominion.c.gcov dominion.gcda dominion.gcno card_test2.out
+	gcc -fprofile-arcs -ftest-coverage -Wall -std=c99 dominion.c card_test2.c rngs.c -o cardtest2 -lm -g
+	./cardtest2 1 >> card_test2.out
+	gcov dominion.c
+	cat dominion.c.gcov >> card_test2.out
+	rm -f dominion.c.gcov dominion.gcda dominion.gcno card_test3.out
+	gcc -fprofile-arcs -ftest-coverage -Wall -std=c99 dominion.c card_test3.c rngs.c -o cardtest3 -lm -g
+	./cardtest3 1 >> card_test3.out
+	gcov dominion.c
+	cat dominion.c.gcov >> card_test3.out
+	rm -f dominion.c.gcov dominion.gcda dominion.gcno card_test4.out
+	gcc -fprofile-arcs -ftest-coverage -Wall -std=c99 dominion.c card_test4.c rngs.c -o cardtest4 -lm -g
+	./cardtest4 1 >> card_test4.out
+	gcov dominion.c
+	cat dominion.c.gcov >> card_test4.out
+
 interface.o: interface.h interface.c
 	gcc -c interface.c -g  $(CFLAGS)
 
