@@ -638,14 +638,15 @@ int getCost(int cardNumber)
 
 //Village
 int village_card(int current_player, struct gameState *game_state, int hand_position) {
+  //Discard Village from hand
+  discardCard(hand_position, current_player, game_state, 0);
+
   //+1 Card
   drawCard(current_player, game_state);
 
   //+2 Actions
-  game_state->numActions += 2;
+  game_state->numActions += 1;
 
-  //Discard Village from hand
-  discardCard(hand_position, current_player, game_state, 0);
 
   return 0;
 }
