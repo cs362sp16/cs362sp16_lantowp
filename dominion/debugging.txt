@@ -1,0 +1,23 @@
+(Understand the system) Prior to this instance of debugging, I have been working with dominion.c for several months and was
+familar with the underlying game.
+(Make it fail) I ran all of my card tests at the same time. I got an error about adding an incorrect number of actions:
+
+Starting game.
+FAIL
+Village added an incorrect number of actions
+File 'dominion.c'
+Lines executed:20.46% of 650
+dominion.c:creating 'dominion.c.gcov'
+
+(Divide and conquer) Since the error mentioned actions, I looked at the actions in the Village function. I noticed that the 
+change in total actions wasn't taking into account the action being spent playing the card, so I reduced the total actions by
+1. Upon making this change, I re-tested. My debugger now said:
+
+Starting game.
+All tests passed for Village
+File 'dominion.c'
+Lines executed:20.46% of 650
+dominion.c:creating 'dominion.c.gcov'
+
+(Change one thing at a time) Since I only made one change, I can be reasonably certain that that was what was causing the bug.
+Since I am no longer getting an error, the bug is now fixed.
