@@ -1,1 +1,8 @@
+Bug Number 1:
+When played, Village adds 1 too few actions to the current player's action pool.
 
+Bug Number 2:
+When played, Council Room has adds 1 too many cards to the current player's hand.
+
+Bug Number 3:
+When played, Adventurer never adds the correct number of cards to the current player's hand.
