@@ -1,1 +1,7 @@
-
+The color-coding of Tarantula was much more helpful for hunting down bugs than scrolling through pages of monochromatic gcov
+files. I decided to tackle a bug I was having with the council room, where it was adding an incorrect number of cards to the
+active player's hand. In this case, what mattered was not what was colored, but what wasn't. Feeling confident that the
+error was a logic problem inside the council_room functioned, I was suprised to find that it wasn't even colored! Glancing
+through the colored sections, I realized that a call to council_room was actually redirecting towards the village card.
+After correcting this name, council room became colored in future tarantula calls. Tarantula was very useful, becuase without
+it I would have likely wasted much time trying to fix council room, when the real problem was that it was even being called.
