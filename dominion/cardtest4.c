@@ -30,7 +30,7 @@ int main (int argc, char** argv) {
   //Test for correct return value
   initial_num_cards = numHandCards(&game_state);
   initial_num_buy = game_state.numBuys;
-  if (my_assert(cardEffect(village, 0, 0, 0, &game_state, 0, 0) == 0,
+  if (my_assert(cardEffect(council_room, 0, 0, 0, &game_state, 0, 0) == 0,
   "Incorrect return value for Council Room\n")) {
     return 0;
   }
