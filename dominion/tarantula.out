@@ -684,31 +684,31 @@ int endTurn(struct gameState *state) {
 
   int i;
 
-[92m  int currentPlayer = whoseTurn(state);
+[91m  int currentPlayer = whoseTurn(state);
 [0m
 
 
   //Discard hand
 
-[92m  for (i = 0; i < state->handCount[currentPlayer]; i++) {
+[91m  for (i = 0; i < state->handCount[currentPlayer]; i++) {
 [0m
-[92m    state->discard[currentPlayer][state->discardCount[currentPlayer]++] = state->hand[currentPlayer][i];//Discard
+[91m    state->discard[currentPlayer][state->discardCount[currentPlayer]++] = state->hand[currentPlayer][i];//Discard
 [0m
-[92m    state->hand[currentPlayer][i] = -1;//Set card to -1
+[91m    state->hand[currentPlayer][i] = -1;//Set card to -1
 [0m
-[92m  }
+[91m  }
 [0m
-[92m  state->handCount[currentPlayer] = 0;//Reset hand count
+[91m  state->handCount[currentPlayer] = 0;//Reset hand count
 [0m
 
 
   //Code for determining the player
 
-[92m  if (currentPlayer < (state->numPlayers - 1)) {
+[91m  if (currentPlayer < (state->numPlayers - 1)) {
 [0m
-[92m    state->whoseTurn = currentPlayer + 1;//Still safe to increment
+[91m    state->whoseTurn = currentPlayer + 1;//Still safe to increment
 [0m
-[92m  }
+[91m  }
 [0m
   else {
 
@@ -718,19 +718,19 @@ int endTurn(struct gameState *state) {
 
 
 
-[92m  state->outpostPlayed = 0;
+[91m  state->outpostPlayed = 0;
 [0m
-[92m  state->phase = 0;
+[91m  state->phase = 0;
 [0m
-[92m  state->numActions = 1;
+[91m  state->numActions = 1;
 [0m
-[92m  state->coins = 0;
+[91m  state->coins = 0;
 [0m
-[92m  state->numBuys = 1;
+[91m  state->numBuys = 1;
 [0m
-[92m  state->playedCardCount = 0;
+[91m  state->playedCardCount = 0;
 [0m
-[92m  state->handCount[state->whoseTurn] = 0;
+[91m  state->handCount[state->whoseTurn] = 0;
 [0m
 
 
@@ -738,21 +738,21 @@ int endTurn(struct gameState *state) {
 
   //Next player draws hand
 
-[92m  for (k = 0; k < 5; k++){
+[91m  for (k = 0; k < 5; k++){
 [0m
-[92m    drawCard(state->whoseTurn, state);//Draw a card
+[91m    drawCard(state->whoseTurn, state);//Draw a card
 [0m
-[92m  }
+[91m  }
 [0m
 
 
   //Update money
 
-[92m  updateCoins(state->whoseTurn, state , 0);
+[91m  updateCoins(state->whoseTurn, state , 0);
 [0m
 
 
-[92m  return 0;
+[91m  return 0;
 [0m
 }
 
@@ -1278,25 +1278,27 @@ int getCost(int cardNumber)
 
 int village_card(int current_player, struct gameState *game_state, int hand_position) {
 
+  //Discard Village from hand
+
+[92m  discardCard(hand_position, current_player, game_state, 0);
+[0m
+
+
   //+1 Card
 
-[91m  drawCard(current_player, game_state);
+[92m  drawCard(current_player, game_state);
 [0m
 
 
   //+2 Actions
 
-[91m  game_state->numActions += 2;
+[92m  game_state->numActions += 1;
 [0m
 
 
-  //Discard Village from hand
-
-[91m  discardCard(hand_position, current_player, game_state, 0);
-[0m
 
 
-[91m  return 0;
+[92m  return 0;
 [0m
 }
 
@@ -1546,48 +1548,48 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
 
       //+4 Cards
 
-      for (i = 0; i < 4; i++)
-
+[91m      for (i = 0; i < 4; i++)
+[0m
 	{
 
-	  drawCard(currentPlayer, state);
-
-	}
-
+[91m	  drawCard(currentPlayer, state);
+[0m
+[91m	}
+[0m
 
 
       //+1 Buy
 
-      state->numBuys++;
-
+[91m      state->numBuys++;
+[0m
 
 
       //Each other player draws a card
 
-      for (i = 0; i < state->numPlayers; i++)
-
+[91m      for (i = 0; i < state->numPlayers; i++)
+[0m
 	{
 
-	  if ( i != currentPlayer )
-
+[91m	  if ( i != currentPlayer )
+[0m
 	    {
 
-	      drawCard(i, state);
-
-	    }
-
-	}
-
+[91m	      drawCard(i, state);
+[0m
+[91m	    }
+[0m
+[91m	}
+[0m
 
 
       //put played card in played card pile
 
-      discardCard(handPos, currentPlayer, state, 0);
+[91m      discardCard(handPos, currentPlayer, state, 0);
+[0m
 
 
-
-      return 0;
-
+[91m      return 0;
+[0m
 
 
     case feast:
@@ -1786,7 +1788,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
 
     case village:
 
-[91m      return village_card(currentPlayer, state, handPos);
+[92m      return village_card(currentPlayer, state, handPos);
 [0m
 
 
